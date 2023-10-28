@@ -8,7 +8,7 @@ RSpec.describe Board do
     expect(default).to be_an_instance_of(Board)
   end
 
-  #Would this need a seperate class? No... of can you randomize the initialize method chosen??
+  # Would RandomBoard this need a seperate class? Or can you randomize the initialize method chosen??
   # it 'exists' do #would work as character-select? drop-down menu?
   #   random_board = Board.new(random_columns, random_rows)
 
