@@ -24,6 +24,7 @@ class Board
       end
       print "|\n"
     end
+    return
   end
 end
 
