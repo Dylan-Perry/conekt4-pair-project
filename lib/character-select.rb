@@ -1,5 +1,5 @@
 class CharacterSelect
-  attr_reader :
+  #  attr_reader :
 
   def initialize
 
