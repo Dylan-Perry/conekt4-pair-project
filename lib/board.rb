@@ -1,37 +1,55 @@
-class Matrix
-
-  attr_reader :columns, :rows
-  attr_accessor :image
-  
-  def initialize(columns, rows)
-    @columns = columns
-    @rows = rows
-    @image = Array.new(rows) { Array.new(columns, ' ') }
-  end
-  
-  def display
-    puts "|C.O.N.E.K.T.4!|"
-    @image.each do |rows|
-      puts "|\u{26AA}" "\u{26AA}" "\u{26AA}" "\u{26AA}" "\u{26AA}" "\u{26AA}" "\u{26AA}|"
-    end
-  end
-end
+require "Matrix"
 
 class Board
+  attr_reader :board_matrix
+
+  def initialize(rows, columns)
+    @rows = rows
+    @columns = columns
+    @board_matrix = Matrix.build(rows, columns) {|cell| "\u{25cc}"}
+  end
   
-  def initialize(columns, rows)
-    @board = Matrix.new(columns, rows)
-  end
-
   def display_board
-    @board.display
-  end
+    # Build and print header array for selecting a column
+    selection_array = ["C", "O", "N", "E", "K", "T", "4"]
+    selection_array.each do |symbol|
+      print "|" + symbol
+    end
+    print "|\n"
 
+    # Print each cell on the board, iterating by row, then by column
+    @rows.times do |row| 
+      @columns.times do |column|
+        print "|" + @board_matrix[row, column]
+      end
+      print "|\n"
+    end
+    return
+  end
 end
 
-default = Board.new(7, 6)
-default.display_board
+# default = Board.new(7, 6)
+# default.display_board
 #Matrix.zero(7)
+
+# class Matrix
+
+#   attr_reader :columns, :rows
+#   attr_accessor :image
+  
+#   def initialize(columns, rows)
+#     @columns = columns
+#     @rows = rows
+#     @image = Array.new(rows) { Array.new(columns, ' ') }
+#   end
+  
+#   def display
+#     puts "|C.O.N.E.K.T.4!|"
+#     @image.each do |rows|
+#       puts "|\u{26AA}" "\u{26AA}" "\u{26AA}" "\u{26AA}" "\u{26AA}" "\u{26AA}" "\u{26AA}|"
+#     end
+#   end
+# end
 
 ##prints as board, but no matrix and stretch goals notes
 # class Board
