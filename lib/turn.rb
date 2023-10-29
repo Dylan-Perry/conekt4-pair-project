@@ -1,5 +1,5 @@
 class Turn
-  attr_reader :
+  # attr_reader :
 
   def initialize
 

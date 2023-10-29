@@ -3,9 +3,10 @@ require './spec/spec-runner'
 RSpec.describe Board do
 
   it 'exists' do
-    default = Board.new(7, 6)
+    conekt4_board = Board.new(6, 7)
 
-    expect(default).to be_an_instance_of(Board)
+    expect(conekt4_board).to be_a Board
+    expect(conekt4_board.board_matrix).to be_a Matrix
   end
 
   # Would RandomBoard this need a seperate class? Or can you randomize the initialize method chosen??

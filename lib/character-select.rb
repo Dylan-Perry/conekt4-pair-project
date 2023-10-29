@@ -1,5 +1,8 @@
 class CharacterSelect
+
   attr_reader :name, :piece
+
+  
 
   def initialize(name, piece)
     @players = []
