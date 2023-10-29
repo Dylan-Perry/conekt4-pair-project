@@ -1,9 +1,9 @@
 RSpec.describe Menu do
 
   it 'exists' do
-     = Menu.new
+     default = Menu.new
 
-    expect().to be_an_instance_of(Menu)
+    expect(default).to be_an_instance_of(Menu)
   end
 
 
