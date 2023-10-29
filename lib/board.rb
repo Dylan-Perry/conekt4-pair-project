@@ -1,101 +1,54 @@
-class Matrix
+class Board
 
-  attr_reader :columns, :rows
-  attr_accessor :image
+  attr_reader :rows, :columns
+  attr_accessor :board
   
-  def initialize(columns, rows)
-    @columns = columns
+  def initialize(rows, columns)
     @rows = rows
-    @image = Array.new(rows) { Array.new(columns, ' ') }
+    @columns = columns
+    @board = Array.new(rows) { Array.new(columns) }
   end
   
-  def display
-    puts "|C.O.N.E.K.T.4!|"
-    @image.each do |rows|
+  def display_board
+    puts "________________"
+    puts "|C O N E K T 4!|"
+    @board.each do |row|
       puts "|\u{26AA}" "\u{26AA}" "\u{26AA}" "\u{26AA}" "\u{26AA}" "\u{26AA}" "\u{26AA}|"
     end
+    puts "----------------"
   end
-end
-
-class Board
   
-  def initialize(columns, rows)
-    @board = Matrix.new(columns, rows)
+  def column_to_index(column_label)
+    column_converter = {
+      "C" => 0,
+      "O" => 1,
+      "N" => 2,
+      "E" => 3,
+      "K" => 4,
+      "T" => 5,
+      "4" => 6, 
+      "4!" => 6
+    }
+    column_converter[column_label]
   end
-
-  def display_board
-    @board.display
-  end
-
 end
 
-default = Board.new(7, 6)
+default = Board.new(6, 7)
 default.display_board
-#Matrix.zero(7)
 
-##prints as board, but no matrix and stretch goals notes
-# class Board
-#   attr_reader :columns, :rows
-
-#   def initialize(columns, rows)
-#     @columns = columns
-#     @rows = rows
-#     @board = Array.new(rows) {Array.new(columns, ' ')}
-#   end
-
-#   def display_board  #(0, 0)accumulator zeros to make it variable? default board (7,6)?
-#     # if greater than seven rows iterate unique emojis unicode? 
-#     # but how would you select the emojis w/o requireing dang near hexidecimals??
-#     # unique columns (for player/cpu choice) require letters, but thats no flavor...
-#     # if default
-#     puts "|C.O.N.E.K.T.4!|"
-#     puts "----------------"
-#     # else #other than player defaults chosen
-#     # puts "~~~~~~~~~~~~~~~"
-#     # puts "W.E.L.C.O.M.3!".red
-#     # puts "~~~~~~~~~~~~~~~"
-#     @board.each do |rows|
-#       # if default #white circle emojis
-#       puts "|\u{26AA}" "\u{26AA}" "\u{26AA}" "\u{26AA}" "\u{26AA}" "\u{26AA}" "\u{26AA}|"
-#       # else #x eyes face
-#       # puts "\u{1F635}" "\u{1F635}" "\u{1F635}" "\u{1F635}" "\u{1F635}" "\u{1F635}" "\u{1F635}"
+# Move this to Turn??
+#   def drop_piece(column_label, piece)
+#     column = column_to_index(column_label)
+#     return false if column.nil? || column < 0 || column >= @columns
+#     puts "Please select a valid column."
+    
+#     row = @rows - 1
+#     while row >= 0
+#       if @board[row][column] == ' '
+#         @board[row][column] = piece
+#         return true
+#       end
+#       row -= 1
 #     end
-# puts "----------------"
-#   end 
-  
-#   #Module to choose different pieces and menu responses?
-#   #Default is all generic and safe and pc, then make a selection and it goes full saw-mode :)
-  
-#   # def decide_piece
-#   #  if default_player = "\u{1F640}"#scared-cat
-#   #  if default_cpu = "\u{1F3C3}"#jack-o-lantern
-#   #  if player_1 = "\u{F3C3}"#running-person <-male/female/non/??
-#   #       cpu_jigsaw = "\u{2699}"#gear
-#   #       cpu_jason = "\u{1F52A}"#kitchen-knife"
-#   # end
-
-#   # def drop_piece(column)
-#     # if @board(column).select = ["C.", "O.", "N.", "E.", "K.", "T.", "4!"]
-#     #   then drop down the row??
-#     # else
-#     #   puts "Please select a valid column."
-#     # if @board(column).select = ["W., E., L., C., O., M., 3!"]
-#     # else
-#     #   puts "The Rules Of Our Game Have Been Made Very Clear. You Need To Abide By Those Rules."
-#   # end
-
-# end
-
-# class String ##ruby gem colorize didnt work but this does
-#   # colorization
-#   def colorize(color_code)
-#     "\e[#{color_code}m#{self}\e[0m"
+#     false 
 #   end
-
-#   def red
-#     colorize(31)
-#   end
-# end
-
-# default = Board.new(7, 6)
-# default.display_board
