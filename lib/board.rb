@@ -26,6 +26,13 @@ class Board
     end
     return
   end
+
+  def change_board(row, column, piece)
+    board_matrix = @board_matrix.to_a
+    board_matrix[row][column] = piece
+    @board_matrix = Matrix.rows(board_matrix)
+  end
+
 end
 
 # default = Board.new(7, 6)
