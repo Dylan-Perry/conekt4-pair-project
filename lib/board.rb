@@ -30,7 +30,7 @@ class Board
 
   # Currently only places "X" pieces; will add additional piece variants alongside player class
   def play_piece(column_selection)
-    if column_selection < 1 || column_selection > @rows
+    if column_selection < 1 || column_selection > @columns
       "Error: Selected column does not exist."
     elsif @board_matrix.column(column_selection - 1)[0] != "\u{25cc}"
       "Error: Column is already full."
