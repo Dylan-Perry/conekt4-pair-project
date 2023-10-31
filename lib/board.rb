@@ -28,6 +28,7 @@ class Board
     return
   end
 
+  # Currently only places "X" pieces; will add additional piece variants alongside player class
   def play_piece(column_selection)
     if column_selection < 1 || column_selection > @rows
       "Error: Selected column does not exist."
@@ -44,6 +45,7 @@ class Board
     end
   end
 end
+
 # def change_board(row, column, piece)
 #   board_matrix = @board_matrix.to_a
 #   board_matrix[row][column] = piece
