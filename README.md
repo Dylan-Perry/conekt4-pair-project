@@ -60,3 +60,91 @@
 #   expect(random_game).to be_an_instance_of(Board) #(RandomBoard?)
 # end
 # *****************************
+
+# archived non-matrix methods for Turn class
+
+<!-- class Turn
+  attr_reader :board
+
+  def initialize(board)
+    @board = board
+  end
+
+  #allows to enter letter instead of choosing index starting with zero
+  def column_to_index(column_label)
+    column_converter = {
+      "C" => 0,
+      "O" => 1,
+      "N" => 2,
+      "E" => 3,
+      "K" => 4,
+      "T" => 5,
+      "4" => 6, 
+    }
+    column_converter[column_label]
+  end
+
+  # changing a Matrix: https://www.ruby-forum.com/t/matrix-class-how-to-set-a-single-element/145002
+  # TLDR need to convert to 2d array, change it, then convert back to matrix??
+  def drop_piece(column_label, piece)
+    column = column_to_index(column_label)
+    return "Invalid column selection" if column.nil?
+      # convert to array
+    board_matrix = @board.board_matrix.to_a
+    row = board_matrix.rindex { |row| row[column] == "\u{25cc}" }
+    if row
+      @board.change_board(row, column, piece)
+      # put all this into seperate method in board so we can call it
+      # board_matrix[row][column] = piece
+      # reconverts to matrix / fails due to scope, which requires change_board method
+      # @board.board_matrix = Matrix.rows(board_matrix)
+    else
+      return "Invalid: column full"
+    end
+  end
+end -->
+
+# Turn class testing archive
+
+<!-- require './lib/turn'
+require './lib/board'
+
+RSpec.describe Turn do
+  
+  before :each do
+    @board = Board.new(6, 7)
+    @turn = Turn.new(@board)
+  end
+  
+  it 'returns the correct column index' do
+    expect(@turn.column_to_index("C")).to eq(0)
+    expect(@turn.column_to_index("O")).to eq(1)
+    expect(@turn.column_to_index("N")).to eq(2)
+    expect(@turn.column_to_index("E")).to eq(3)
+    expect(@turn.column_to_index("K")).to eq(4)
+    expect(@turn.column_to_index("T")).to eq(5)
+    expect(@turn.column_to_index("4")).to eq(6)
+  end
+
+  it 'chooses invalid column label' do
+    expect(@turn.drop_piece("A", "\u{1F640}")).to eq("Invalid column selection")    
+  end
+
+  it 'makes valid move and drops a piece' do 
+    @turn.drop_piece("C", "\u{1F640}")
+
+    expect(@board.board_matrix[5, 0]).to eq("\u{1F640}")
+  end
+
+  it 'chooses full column' do
+    @turn.drop_piece("C", "\u{1F640}")
+    @turn.drop_piece("C", "\u{1F640}")
+    @turn.drop_piece("C", "\u{1F640}")
+    @turn.drop_piece("C", "\u{1F3C3}")
+    @turn.drop_piece("C", "\u{1F3C3}")
+    @turn.drop_piece("C", "\u{1F3C3}")
+
+    expect(@turn.drop_piece("C", "\u{1F640}")).to eq("Invalid: column full")
+  end
+
+end -->
