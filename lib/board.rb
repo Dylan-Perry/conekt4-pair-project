@@ -12,7 +12,7 @@ class Board
   
   def display_board
     # Build and print header array for selecting a column
-    selection_array = ["C", "O", "N", "E", "K", "T", "4"]
+    selection_array = ["1", "2", "3", "4", "5", "6", "7"]
     selection_array.each do |symbol|
       print "|" + symbol
     end
