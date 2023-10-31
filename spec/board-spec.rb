@@ -7,6 +7,18 @@ RSpec.describe Board do
 
     expect(conekt4_board).to be_a Board
     expect(conekt4_board.board_matrix).to be_a Matrix
+    expect(conekt4_board.column(0)).to eq(Vector["◌", "◌", "◌", "◌", "◌", "◌"])
+    expect(conekt4_board.row(0)).to eq(Vector["◌", "◌", "◌", "◌", "◌", "◌", "◌"])
+  end
+
+  describe "#display_board" do
+    before :each do
+      conekt4_board = Board.new(6, 7)
+    end
+
+    it "displays an empty board, with column selection header row" do
+      expect{puts board.board_matrix}.to output("Matrix[[◌, ◌, ◌, ◌, ◌, ◌, ◌], [◌, ◌, ◌, ◌, ◌, ◌, ◌], [◌, ◌, ◌, ◌, ◌, ◌, ◌], [◌, ◌, ◌, ◌, ◌, ◌, ◌], [◌, ◌, ◌, ◌, ◌, ◌, ◌], [◌, ◌, ◌, ◌, ◌, ◌, ◌]]").to_stdout
+    end
   end
 
   # Would RandomBoard this need a seperate class? Or can you randomize the initialize method chosen??
