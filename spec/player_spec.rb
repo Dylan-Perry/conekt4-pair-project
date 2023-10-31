@@ -1,7 +1,7 @@
-RSpec.describe CharacterSelect do
+RSpec.describe Player do
 
   it 'exists' do
-    default = CharacterSelect.new
+    default = Player.new
 
     expect(default).to be_an_instance_of(CharacterSelect)
   end

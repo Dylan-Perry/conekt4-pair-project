@@ -1,4 +1,4 @@
-class CharacterSelect
+class Player
 
   attr_reader :name, :piece
 
