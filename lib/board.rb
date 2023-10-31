@@ -1,7 +1,8 @@
 require "Matrix"
 
 class Board
-  attr_reader :board_matrix
+  attr_accessor :board_matrix
+  attr_reader :rows, :columns
 
   def initialize(rows, columns)
     @rows = rows
@@ -27,17 +28,28 @@ class Board
     return
   end
 
-  def change_board(row, column, piece)
-    board_matrix = @board_matrix.to_a
-    board_matrix[row][column] = piece
-    @board_matrix = Matrix.rows(board_matrix)
+  def play_piece(column_selection)
+    if column_selection < 1 || column_selection > @rows
+      "Error: Selected column does not exist."
+    elsif @board_matrix.column(column_selection - 1)[0] != "\u{25cc}"
+      "Error: Column is already full."
+    else
+      column_index = 0
+      @board_matrix.column(column_selection - 1).each do |cell|
+        if cell == "\u{25cc}" && column_index < @rows
+          column_index += 1
+        end
+      end
+      @board_matrix[column_index - 1, column_selection - 1] = "X"      
+    end
   end
-
 end
 
-# default = Board.new(7, 6)
-# default.display_board
-#Matrix.zero(7)
+# def change_board(row, column, piece)
+#   board_matrix = @board_matrix.to_a
+#   board_matrix[row][column] = piece
+#   @board_matrix = Matrix.rows(board_matrix)
+# end
 
 # class Matrix
 
