@@ -40,11 +40,10 @@ class Board
           column_index += 1
         end
       end
-      @board_matrix[column_index - 1, column_selection - 1] = "X"      
+      @board_matrix[column_index - 1, column_selection - 1] = "X"
     end
   end
 end
-
 # def change_board(row, column, piece)
 #   board_matrix = @board_matrix.to_a
 #   board_matrix[row][column] = piece
