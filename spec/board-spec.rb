@@ -1,4 +1,5 @@
 require './spec/spec-runner'
+require "matrix"
 
 RSpec.describe Board do
 
@@ -7,15 +8,38 @@ RSpec.describe Board do
 
     expect(conekt4_board).to be_a Board
     expect(conekt4_board.board_matrix).to be_a Matrix
+    expect(conekt4_board.board_matrix.column(0)).to eq(Vector["◌", "◌", "◌", "◌", "◌", "◌"])
+    expect(conekt4_board.board_matrix.row(0)).to eq(Vector["◌", "◌", "◌", "◌", "◌", "◌", "◌"])
   end
 
-  # Would RandomBoard this need a seperate class? Or can you randomize the initialize method chosen??
-  # it 'exists' do #would work as character-select? drop-down menu?
-  #   random_board = Board.new(random_columns, random_rows)
+  describe "#display_board" do
+    conekt4_board = Board.new(6, 7)
 
-  #   expect(random_game).to be_an_instance_of(Board) #(RandomBoard?)
-  # end
+    it "displays an empty board, with column selection header row" do
+      expect{puts conekt4_board.board_matrix}.to output("Matrix[[◌, ◌, ◌, ◌, ◌, ◌, ◌], [◌, ◌, ◌, ◌, ◌, ◌, ◌], [◌, ◌, ◌, ◌, ◌, ◌, ◌], [◌, ◌, ◌, ◌, ◌, ◌, ◌], [◌, ◌, ◌, ◌, ◌, ◌, ◌], [◌, ◌, ◌, ◌, ◌, ◌, ◌]]\n").to_stdout
+    end
+  end
 
+  describe "#play_piece" do
+    conekt4_board = Board.new(6, 7)
+
+    it "stacks pieces in a column until column is full, then prints an error message when selecting full column" do
+      expect(conekt4_board.board_matrix.column(2)).to eq(Vector["◌", "◌", "◌", "◌", "◌", "◌"])
+      
+      conekt4_board.play_piece(3)
+      conekt4_board.play_piece(3)
+      conekt4_board.play_piece(3)
+      conekt4_board.play_piece(3)
+      conekt4_board.play_piece(3)
+      conekt4_board.play_piece(3)
+
+      expect(conekt4_board.board_matrix.column(2)).to eq(Vector["X", "X", "X", "X", "X", "X"])
+      expect(conekt4_board.play_piece(3)).to eq("Error: Column is already full.")
+    end
+
+    it "errors out when playing a piece in a non-existent column" do
+      expect(conekt4_board.play_piece(0)).to eq("Error: Selected column does not exist.")
+      expect(conekt4_board.play_piece(8)).to eq("Error: Selected column does not exist.")
+    end
+  end
 end
-
-#Additional 'quote notes' for main branch upon pull and agreement
