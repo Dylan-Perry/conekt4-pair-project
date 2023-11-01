@@ -29,7 +29,7 @@ class Board
   end
 
   # Currently only places "X" pieces; will add additional piece variants alongside player class
-  def play_piece(column_selection)
+  def play_piece(column_selection, human)
     if column_selection < 1 || column_selection > @columns
       "Error: Selected column does not exist."
     elsif @board_matrix.column(column_selection - 1)[0] != "\u{25cc}"
@@ -41,7 +41,11 @@ class Board
           column_index += 1
         end
       end
-      @board_matrix[column_index - 1, column_selection - 1] = "X"
+      if human 
+        @board_matrix[column_index - 1, column_selection - 1] = "X"
+      else
+        @board_matrix[column_index - 1, column_selection - 1] = "O"
+      end
       @played_piece = [column_index - 1, column_selection - 1] # Assigning last played piece coords to variable for check_for_win
     end
   end
@@ -51,7 +55,7 @@ class Board
     @board_matrix.row(@played_piece[0]).to_a.each_cons(4) do |cells| 
       if cells == ["X", "X", "X", "X"]
         display_board
-        puts "Winner Horizontal"
+        puts "Horizontal Win!"
         return true
       end
     end
@@ -59,7 +63,7 @@ class Board
     @board_matrix.column(@played_piece[1]).to_a.each_cons(4) do |cells|
       if cells == ["X", "X", "X", "X"]
         display_board
-        puts "Winner Vertical"
+        puts "Vertical Win!"
         return true
       end
     end
@@ -76,7 +80,7 @@ class Board
     diagonal_array_up_left.each_cons(4) do |cells|
       if cells == ["X", "X", "X", "X"]
         display_board
-        puts "Winner Diagonal Up Left"
+        puts "Diagonal Win! (Up Left)"
         return true
       end
     end
@@ -93,7 +97,7 @@ class Board
     diagonal_array_up_right.each_cons(4) do |cells|
       if cells == ["X", "X", "X", "X"]
         display_board
-        puts "Winner Diagonal Up Right"
+        puts "Diagonal Win! (Up Right)"
         return true
       end
     end
