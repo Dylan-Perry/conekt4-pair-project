@@ -12,7 +12,7 @@ class Board
   
   def display_board
     # Build and print header array for selecting a column
-    selection_array = ["C", "O", "N", "E", "K", "T", "4"]
+    selection_array = ["1", "2", "3", "4", "5", "6", "7"]
     selection_array.each do |symbol|
       print "|" + symbol
     end
@@ -30,7 +30,7 @@ class Board
 
   # Currently only places "X" pieces; will add additional piece variants alongside player class
   def play_piece(column_selection)
-    if column_selection < 1 || column_selection > @rows
+    if column_selection < 1 || column_selection > @columns
       "Error: Selected column does not exist."
     elsif @board_matrix.column(column_selection - 1)[0] != "\u{25cc}"
       "Error: Column is already full."
