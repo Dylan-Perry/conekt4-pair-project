@@ -51,13 +51,43 @@ class Board
     # Use the row coordinates from @played_piece to identify row, then convert row to array, then check array with each_cons
     @board_matrix.row(@played_piece[0]).to_a.each_cons(4) do |cells| 
       if cells == ["X", "X", "X", "X"]
-        puts "Winner"
+        puts "Winner Horizontal"
       end
     end
     # Use the column coordinates from @played_piece to identify column, then convert column to array, then check array with each_cons
     @board_matrix.column(@played_piece[1]).to_a.each_cons(4) do |cells|
       if cells == ["X", "X", "X", "X"]
-        puts "Winner"
+        puts "Winner Vertical"
+      end
+    end
+    # Use the coordinates from @played_piece for start point, then check +/- 3 cells from center diagonally up left
+    diagonal_array_up_left = [
+      @board_matrix[@played_piece[0]-3,@played_piece[1]-3],
+      @board_matrix[@played_piece[0]-2,@played_piece[1]-2],
+      @board_matrix[@played_piece[0]-1,@played_piece[1]-1],
+      @board_matrix[@played_piece[0],@played_piece[1]],
+      @board_matrix[@played_piece[0]+1,@played_piece[1]+1],
+      @board_matrix[@played_piece[0]+2,@played_piece[1]+2],
+      @board_matrix[@played_piece[0]+3,@played_piece[1]+3],
+    ]
+    diagonal_array_up_left.each_cons(4) do |cells|
+      if cells == ["X", "X", "X", "X"]
+        puts "Winner Diagonal Up Left"
+      end
+    end
+    # Use the coordinates from @played_piece for start point, then check +/- 3 cells from center diagonally up right
+    diagonal_array_up_right = [
+      @board_matrix[@played_piece[0]-3,@played_piece[1]+3],
+      @board_matrix[@played_piece[0]-2,@played_piece[1]+2],
+      @board_matrix[@played_piece[0]-1,@played_piece[1]+1],
+      @board_matrix[@played_piece[0],@played_piece[1]],
+      @board_matrix[@played_piece[0]+1,@played_piece[1]-1],
+      @board_matrix[@played_piece[0]+2,@played_piece[1]-2],
+      @board_matrix[@played_piece[0]+3,@played_piece[1]-3],
+    ]
+    diagonal_array_up_right.each_cons(4) do |cells|
+      if cells == ["X", "X", "X", "X"]
+        puts "Winner Diagonal Up Right"
       end
     end
   end
