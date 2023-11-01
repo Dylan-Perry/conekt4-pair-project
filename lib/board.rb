@@ -48,11 +48,13 @@ class Board
   end
 
   def check_for_win
-    @board_matrix.row(@played_piece[0]).to_a.each_cons(4) do |cells|
+    # Use the row coordinates from @played_piece to identify row, then convert row to array, then check array with each_cons
+    @board_matrix.row(@played_piece[0]).to_a.each_cons(4) do |cells| 
       if cells == ["X", "X", "X", "X"]
         puts "Winner"
       end
     end
+    # Use the column coordinates from @played_piece to identify column, then convert column to array, then check array with each_cons
     @board_matrix.column(@played_piece[1]).to_a.each_cons(4) do |cells|
       if cells == ["X", "X", "X", "X"]
         puts "Winner"
