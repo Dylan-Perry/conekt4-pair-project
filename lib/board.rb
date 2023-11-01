@@ -43,7 +43,6 @@ class Board
       end
       @board_matrix[column_index - 1, column_selection - 1] = "X"
       @played_piece = [column_index - 1, column_selection - 1] # Assigning last played piece coords to variable for check_for_win
-      check_for_win # Run check_for_win method
     end
   end
 
@@ -51,13 +50,17 @@ class Board
     # Use the row coordinates from @played_piece to identify row, then convert row to array, then check array with each_cons
     @board_matrix.row(@played_piece[0]).to_a.each_cons(4) do |cells| 
       if cells == ["X", "X", "X", "X"]
+        display_board
         puts "Winner Horizontal"
+        return true
       end
     end
     # Use the column coordinates from @played_piece to identify column, then convert column to array, then check array with each_cons
     @board_matrix.column(@played_piece[1]).to_a.each_cons(4) do |cells|
       if cells == ["X", "X", "X", "X"]
+        display_board
         puts "Winner Vertical"
+        return true
       end
     end
     # Use the coordinates from @played_piece for start point, then check +/- 3 cells from center diagonally up left
@@ -72,7 +75,9 @@ class Board
     ]
     diagonal_array_up_left.each_cons(4) do |cells|
       if cells == ["X", "X", "X", "X"]
+        display_board
         puts "Winner Diagonal Up Left"
+        return true
       end
     end
     # Use the coordinates from @played_piece for start point, then check +/- 3 cells from center diagonally up right
@@ -87,7 +92,9 @@ class Board
     ]
     diagonal_array_up_right.each_cons(4) do |cells|
       if cells == ["X", "X", "X", "X"]
+        display_board
         puts "Winner Diagonal Up Right"
+        return true
       end
     end
   end

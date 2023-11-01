@@ -62,12 +62,16 @@ class Game
       #   break
       # end
     end
-    take_turn # advances to the next turn
+    if @board.check_for_win == true
+      end_game
+    else
+      take_turn # advances to the next turn
+    end
   end
   
   def end_game
-    exit
     puts "7H4NK5 4 P74Y1N6!"
+    # exit
   end
 
 end
