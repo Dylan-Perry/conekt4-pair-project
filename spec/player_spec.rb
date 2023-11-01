@@ -1,16 +1,24 @@
+require "./spec/spec-runner"
+
 RSpec.describe Player do
 
   it 'exists' do
-    default = Player.new
-
-    expect(default).to be_an_instance_of(CharacterSelect)
+    player = Player.new
+    
+    expect(player).to be_an_instance_of(Player)
   end
-
-  it 'displays a welcome message' do
-
-
-    expect(default.display_welcome_message).to eq("Connect four in a row to win!")
-  end
-
   
+  it 'creates a human player by default' do
+    player = Player.new
+
+    expect(player.human?).to be true
+  end
+  
+  it 'switches the player to a computer' do
+    player = Player.new
+    player.make_computer
+    
+    expect(player.human?).to be false
+  end
+
 end
