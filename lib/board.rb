@@ -42,6 +42,21 @@ class Board
         end
       end
       @board_matrix[column_index - 1, column_selection - 1] = "X"
+      @played_piece = [column_index - 1, column_selection - 1] # Assigning last played piece coords to variable for check_for_win
+      check_for_win # Run check_for_win method
+    end
+  end
+
+  def check_for_win
+    @board_matrix.row(@played_piece[0]).to_a.each_cons(4) do |cells|
+      if cells == ["X", "X", "X", "X"]
+        puts "Winner"
+      end
+    end
+    @board_matrix.column(@played_piece[1]).to_a.each_cons(4) do |cells|
+      if cells == ["X", "X", "X", "X"]
+        puts "Winner"
+      end
     end
   end
 end
