@@ -44,10 +44,8 @@ class Game
 
   def valid_input(user_input)
     if user_input.to_i < 1 || user_input.to_i > @board.columns # ensures the input matches one of the columns
-      puts "Error: Selected column does not exist."
       return "error_nocolumn"
     elsif @board.board_matrix.column(user_input.to_i - 1)[0] != "\u{25cc}" # ensures the column is not already full
-      puts "Error: Column is already full."
       return "error_fullcolumn"
     else
       return "valid"
@@ -60,9 +58,9 @@ class Game
       puts "Please select a column by entering its number."
       while user_input = gets.chomp # input loop for player column selection
         if valid_input(user_input) == "error_nocolumn"
-          puts "Error: Selected column does not exist."
+          puts "Error: Selected column does not exist. Please select a valid column."
         elsif valid_input(user_input) == "error_fullcolumn"
-          puts "Error: Column is already full."
+          puts "Error: Column is already full. Please select a valid column."
         else
           @board.play_piece(user_input.to_i, player_one.human?) # plays the piece, and breaks the loop
           break

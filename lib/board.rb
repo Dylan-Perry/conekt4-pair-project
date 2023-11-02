@@ -30,30 +30,24 @@ class Board
 
   # Currently only places "X" pieces; will add additional piece variants alongside player class
   def play_piece(column_selection, human)
-    if column_selection < 1 || column_selection > @columns
-      "Error: Selected column does not exist."
-    elsif @board_matrix.column(column_selection - 1)[0] != "\u{25cc}"
-      "Error: Column is already full."
-    else
-      column_index = 0
-      @board_matrix.column(column_selection - 1).each do |cell|
-        if cell == "\u{25cc}" && column_index < @rows
-          column_index += 1
-        end
+    column_index = 0
+    @board_matrix.column(column_selection - 1).each do |cell|
+      if cell == "\u{25cc}" && column_index < @rows
+        column_index += 1
       end
-      if human 
-        @board_matrix[column_index - 1, column_selection - 1] = "X"
-      else
-        @board_matrix[column_index - 1, column_selection - 1] = "O"
-      end
-      @played_piece = [column_index - 1, column_selection - 1] # Assigning last played piece coords to variable for check_for_win
     end
+    if human 
+      @board_matrix[column_index - 1, column_selection - 1] = "X"
+    else
+      @board_matrix[column_index - 1, column_selection - 1] = "O"
+    end
+    @played_piece = [column_index - 1, column_selection - 1] # Assigning last played piece coords to variable for check_for_win
   end
 
   def check_for_win
     # Use the row coordinates from @played_piece to identify row, then convert row to array, then check array with each_cons
     @board_matrix.row(@played_piece[0]).to_a.each_cons(4) do |cells| 
-      if cells == ["X", "X", "X", "X"]
+      if cells == ["X", "X", "X", "X"] || cells == ["O", "O", "O", "O"]
         display_board
         puts "Horizontal Win!"
         return true
@@ -61,7 +55,7 @@ class Board
     end
     # Use the column coordinates from @played_piece to identify column, then convert column to array, then check array with each_cons
     @board_matrix.column(@played_piece[1]).to_a.each_cons(4) do |cells|
-      if cells == ["X", "X", "X", "X"]
+      if cells == ["X", "X", "X", "X"] || cells == ["O", "O", "O", "O"]
         display_board
         puts "Vertical Win!"
         return true
@@ -78,7 +72,7 @@ class Board
       @board_matrix[@played_piece[0]+3,@played_piece[1]+3],
     ]
     diagonal_array_up_left.each_cons(4) do |cells|
-      if cells == ["X", "X", "X", "X"]
+      if cells == ["X", "X", "X", "X"] || cells == ["O", "O", "O", "O"]
         display_board
         puts "Diagonal Win! (Up Left)"
         return true
@@ -95,7 +89,7 @@ class Board
       @board_matrix[@played_piece[0]+3,@played_piece[1]-3],
     ]
     diagonal_array_up_right.each_cons(4) do |cells|
-      if cells == ["X", "X", "X", "X"]
+      if cells == ["X", "X", "X", "X"] || cells == ["O", "O", "O", "O"]
         display_board
         puts "Diagonal Win! (Up Right)"
         return true
